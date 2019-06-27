@@ -1,4 +1,4 @@
-import React, {ChangeEvent, Component} from 'react';
+import React, {ChangeEvent, Component, FormEvent} from 'react';
 import axios from 'axios';
 
 interface State {
@@ -8,7 +8,8 @@ interface State {
         lastName: string,
         password: string,
         passwordConfirm: string
-    }
+    },
+    errorMessage: ''
 }
 
 class RegisterForm extends React.Component<{}, State> {
@@ -22,7 +23,8 @@ class RegisterForm extends React.Component<{}, State> {
                 lastName: '',
                 password: '',
                 passwordConfirm: '',
-            }
+            },
+            errorMessage: ''
         }
     }
 
@@ -40,7 +42,7 @@ class RegisterForm extends React.Component<{}, State> {
         return true;
     };
 
-    handleSubmit = (event: Event) => {
+    handleSubmit = (event: FormEvent) => {
         event.preventDefault();
 
         axios.post('https://reqres.in/api/register', this.state.formControls)
